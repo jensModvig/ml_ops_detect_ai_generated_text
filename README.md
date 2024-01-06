@@ -1,4 +1,5 @@
 # project_name
+LLM - Detect AI Generated Text
 
 Project repository for Machine Learning Operation 02476
 
