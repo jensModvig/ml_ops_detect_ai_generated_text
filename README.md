@@ -2,6 +2,10 @@
 
 Project repository for Machine Learning Operation 02476
 
+- Jacob Sebastian Engel Ketmig (s194264)
+- Pavlos Mylis Adamakis (s222968)
+- Daniel Mathias Holmelund (s194245)
+- Jens Dieter Kjær Modvig (s173955)
 
 ## Project description
 
@@ -75,8 +79,8 @@ The directory structure of the project looks like this:
 # Checklist 
 ### Week 1
 
-* [ ] Create a git repository
-* [ ] Make sure that all team members have write access to the github repository
+* [x] Create a git repository
+* [x] Make sure that all team members have write access to the github repository
 * [ ] Create a dedicated environment for you project to keep track of your packages
 * [ ] Create the initial file structure using cookiecutter
 * [ ] Fill out the `make_dataset.py` file such that it downloads whatever data you need and
