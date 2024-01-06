@@ -1,6 +1,6 @@
-# Detect AI generated text
+# Detect AI Generated Text
 
-Project repository for Machine Learning Operation 02476 - DTU
+Project repository for Machine Learning Operation 02476
 
 ## Project structure
 
@@ -58,8 +58,7 @@ The directory structure of the project looks like this:
 └── LICENSE              <- Open-source license if one is chosen
 ```
 
-# Checklist for project
-
+# Checklist 
 ### Week 1
 
 * [ ] Create a git repository
@@ -109,7 +108,6 @@ The directory structure of the project looks like this:
 * [ ] Revisit your initial project description. Did the project turn out as you wanted?
 * [ ] Make sure all group members have a understanding about all parts of the project
 * [ ] Uploaded all your code to github
-
 
 Created using [mlops_template](https://github.com/SkafteNicki/mlops_template),
 a [cookiecutter template](https://github.com/cookiecutter/cookiecutter) for getting
