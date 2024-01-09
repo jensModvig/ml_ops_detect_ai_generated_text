@@ -4,8 +4,8 @@
 # GLOBALS                                                                       #
 #################################################################################
 
-PROJECT_NAME = project_name
-PYTHON_VERSION = 3.10
+PROJECT_NAME = ml_ops_detect_ai_generated_text
+PYTHON_VERSION = 3.11
 PYTHON_INTERPRETER = python
 
 #################################################################################

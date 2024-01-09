@@ -1,1 +1,21 @@
-torch >= 2.1.0
+# data science
+numpy
+pandas
+scikit-learn
+scipy
+matplotlib
+pytorch-lightning
+
+# logging
+wandb
+
+
+# data management
+kaggle
+google-cloud-storage
+dvc
+dvc[gdrive]
+
+# dependency management
+pipreqs
+

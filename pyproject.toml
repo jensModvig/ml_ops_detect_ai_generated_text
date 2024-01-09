@@ -3,7 +3,7 @@ requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "project_name"
+name = "ml_ops_detect_ai_generated_text"
 version = "0.0.1"
 description = "Project repository for Machine Learning Operation 02476"
 authors = [
@@ -11,11 +11,11 @@ authors = [
 ]
 license = { file = "LICENSE" }
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dynamic = ["dependencies", "optional-dependencies"]
 
 [tool.setuptools]
-packages = ["project_name"]
+packages = ["ml_ops_detect_ai_generated_text"]
 
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}
