@@ -1,7 +1,10 @@
 
-
-
 defaults:
   - model: model_conf.yaml
   - training: training_conf.yaml
   - data: data_conf.yaml
+
+version_base: 1.2
+
+wandb:
+  project: "ml_ops_detect_ai_generated_text"

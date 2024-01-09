@@ -4,8 +4,10 @@ data/
 models/
 outputs/
 wandb/
+
 # but not the following paths:
 !ml_ops_detect_ai_generated_text/data/
+!configs/data/
 !ml_ops_detect_ai_generated_text/models/
 
 # test cache

@@ -1,22 +1,7 @@
-# data science
-numpy
-pandas
-scikit-learn
-scipy
-matplotlib
-pytorch-lightning
-transformers
-
-# logging
-wandb
-
-
-# data management
-kaggle
-google-cloud-storage
-dvc
-dvc[gdrive]
-
-# dependency management
-pipreqs
-
+hydra-core==1.3.2
+numpy==1.26.3
+omegaconf==2.3.0
+pandas==2.1.4
+pytorch_lightning==2.1.3
+torch==2.1.2
+transformers==4.36.2

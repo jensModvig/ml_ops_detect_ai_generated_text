@@ -12,10 +12,7 @@ def get_paths():
     """
 
     repo_path = Path(__file__).resolve().parents[1]
-    data_path = repo_path / 'data'
-    model_path = repo_path / 'models'
+    data_path = repo_path / "data"
+    model_path = repo_path / "models"
 
     return repo_path, data_path, model_path
-
-
-

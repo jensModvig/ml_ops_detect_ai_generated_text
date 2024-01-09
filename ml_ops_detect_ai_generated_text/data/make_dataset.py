@@ -6,32 +6,34 @@ import pandas as pd
 import re
 import torch
 from transformers import DistilBertTokenizer
+from torch.utils.data import TensorDataset
 
 from ml_ops_detect_ai_generated_text.utilities import get_paths
 
 
-def clean_text(text):
+def clean_text(text: str) -> str:
     # RE to remove unnecessary spaces, keep single
-    cleaned_text = re.sub(' +', ' ', text)
+    cleaned_text = re.sub(" +", " ", text)
     # lower case
     cleaned_text = cleaned_text.lower()
     return cleaned_text
 
 
 def process_data(raw_data_path, processed_data_path):
-
     # Read data
-    data = pd.read_csv(raw_data_path / 'train_essays.csv')
-    
+    data = pd.read_csv(raw_data_path / "train_essays.csv")
+
     # Clean text
-    data['text'] = data['text'].apply(clean_text)
+    data["text"] = data["text"].apply(clean_text)
 
     # Load DistilBERT tokenizer
     tokenizer = DistilBertTokenizer.from_pretrained("distilbert-base-uncased")
     # Tokenize the entire dataset
     max_length = 512
-    tokenized_texts = tokenizer(data['text'].tolist(), truncation=True, padding=True, max_length=max_length, return_tensors="pt")
-    labels = data['generated'].tolist()
+    tokenized_texts = tokenizer(
+        data["text"].tolist(), truncation=True, padding=True, max_length=max_length, return_tensors="pt"
+    )
+    labels = data["generated"].tolist()
 
     # Split data
     train_size = 0.8
@@ -45,35 +47,40 @@ def process_data(raw_data_path, processed_data_path):
     test_size = len(tokenized_texts["input_ids"]) - train_size - val_size
 
     # Create datasets
-    train_dataset = {
-        "input_ids": tokenized_texts["input_ids"][:train_size],
-        "attention_mask": tokenized_texts["attention_mask"][:train_size],
-        "labels": torch.tensor(labels[:train_size])
-    }
+    train_dataset = TensorDataset(
+        torch.tensor(tokenized_texts["input_ids"]
+                     [:train_size]).clone().detach(),
+        torch.tensor(tokenized_texts["attention_mask"]
+                     [:train_size]).clone().detach(),
+        torch.tensor(labels[:train_size]).clone().detach(),
+    )
 
-    val_dataset = {
-        "input_ids": tokenized_texts["input_ids"][train_size:train_size + val_size],
-        "attention_mask": tokenized_texts["attention_mask"][train_size:train_size + val_size],
-        "labels": torch.tensor(labels[train_size:train_size + val_size])
-    }
+    val_dataset = TensorDataset(
+        torch.tensor(
+            tokenized_texts["input_ids"][train_size: train_size + val_size]).clone().detach(),
+        torch.tensor(tokenized_texts["attention_mask"]
+                     [train_size: train_size + val_size]).clone().detach(),
+        torch.tensor(labels[train_size: train_size +
+                     val_size]).clone().detach(),
+    )
 
-    test_dataset = {
-        "input_ids": tokenized_texts["input_ids"][-test_size:],
-        "attention_mask": tokenized_texts["attention_mask"][-test_size:],
-        "labels": torch.tensor(labels[-test_size:])
-    }
+    test_dataset = TensorDataset(
+        torch.tensor(tokenized_texts["input_ids"]
+                     [-test_size:]).clone().detach(),
+        torch.tensor(tokenized_texts["attention_mask"]
+                     [-test_size:]).clone().detach(),
+        torch.tensor(labels[-test_size:]).clone().detach(),
+    )
 
     # Save datasets
-    torch.save(train_dataset, processed_data_path / 'train_dataset.pt')
-    torch.save(val_dataset, processed_data_path / 'val_dataset.pt')
-    torch.save(test_dataset, processed_data_path / 'test_dataset.pt')
+    torch.save(train_dataset, processed_data_path / "train_dataset.pt")
+    torch.save(val_dataset, processed_data_path / "val_dataset.pt")
+    torch.save(test_dataset, processed_data_path / "test_dataset.pt")
 
-    print('Data processed successfully!')
-
-
+    print("Data processed successfully!")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     """
     Data processing script.
     Process the raw data (../raw) into a cleaned format (../processed).
@@ -84,18 +91,16 @@ if __name__ == '__main__':
     repo_path, data_path, model_path = get_paths()
 
     # Check if the raw data exists
-    raw_data_path = data_path / 'raw' / 'llm-detect-ai-generated-text'
+    raw_data_path = data_path / "raw" / "llm-detect-ai-generated-text"
     if not raw_data_path.exists():
         raise FileNotFoundError(
-            f'Raw data not found at {raw_data_path}. '
-            f"Please download the data using the 'dvc pull'"
+            f"Raw data not found at {raw_data_path}. " f"Please download the data using the 'dvc pull'"
         )
 
-
-    processed_data_path = data_path / 'processed' / 'llm-detect-ai-generated-text'
+    # Create processed data folder
+    processed_data_path = data_path / "processed" / "llm-detect-ai-generated-text"
     if not processed_data_path.exists():
         processed_data_path.mkdir(parents=True, exist_ok=True)
-        
+
     # Process data
     process_data(raw_data_path, processed_data_path)
-
