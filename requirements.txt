@@ -1,9 +1,35 @@
 # This assumes you have Python 3.10 in your virtual environment
-# can be alleviated with >= need to discuss with group
-hydra-core==1.3.2
+# can be alleviated with >=, need to discuss with group
+
+# General
 numpy==1.26.3
-omegaconf==2.3.0
 pandas==2.1.4
-pytorch_lightning==2.1.3
 torch==2.1.2
 transformers==4.36.2
+huggingface
+torchvision
+scipy
+scikit-learn
+matplotlib
+seaborn
+
+# Config
+hydra-core==1.3.2
+omegaconf==2.3.0
+
+# Boilerplate
+pytorch_lightning==2.1.3
+
+# Infrastructure, continuous integration and linting
+pre-commit
+coverage
+wandb
+dvc
+dvc[gdrive]
+dvc[gs]
+google-api-python-client
+mypy
+flake8
+
+torch_tb_profiler
+
