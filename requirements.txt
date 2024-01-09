@@ -5,6 +5,7 @@ scikit-learn
 scipy
 matplotlib
 pytorch-lightning
+transformers
 
 # logging
 wandb

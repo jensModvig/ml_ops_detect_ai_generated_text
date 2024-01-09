@@ -1,26 +1,35 @@
 import torch
+import pytorch_lightning as pl
+from transformers import DistilBertForSequenceClassification, DistilBertTokenizer
 
-class MyNeuralNet(torch.nn.Module):
-    """ Basic neural network class. 
-    
-    Args:
-        in_features: number of input features
-        out_features: number of output features
-    
-    """
-    def __init__(self, in_features: int, out_features: int) -> None:
-        self.l1 = torch.nn.Linear(in_features, 500)
-        self.l2 = torch.nn.Linear(500, out_features)
-        self.r = torch.nn.ReLU()
-    
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """Forward pass of the model.
-        
-        Args:
-            x: input tensor expected to be of shape [N,in_features]
 
-        Returns:
-            Output tensor with shape [N,out_features]
 
-        """
-        return self.l2(self.r(self.l1(x)))
+class TextClassificationModel(pl.LightningModule):
+    def __init__(self, model_name, num_labels):
+        super(TextClassificationModel, self).__init__()
+        self.model = DistilBertForSequenceClassification.from_pretrained(model_name, num_labels=num_labels)
+        self.tokenizer = DistilBertTokenizer.from_pretrained(model_name)
+
+    def forward(self, input_ids, attention_mask):
+        return self.model(input_ids, attention_mask)
+
+    def training_step(self, batch, batch_idx):
+        input_ids, attention_mask, labels = batch
+        outputs = self(input_ids, attention_mask)
+        loss = outputs.loss
+        return loss
+
+    def validation_step(self, batch, batch_idx):
+        input_ids, attention_mask, labels = batch
+        outputs = self(input_ids, attention_mask)
+        loss = outputs.loss
+        logits = outputs.logits
+        preds = torch.argmax(logits, dim=1)
+        acc = (preds == labels).float().mean()
+        return {"val_loss": loss, "val_acc": acc}
+
+    def configure_optimizers(self):
+            return torch.optim.AdamW(self.parameters(), lr=2e-5)
+
+
+

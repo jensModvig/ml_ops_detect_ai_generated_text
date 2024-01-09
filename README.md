@@ -29,13 +29,14 @@ The initial dataset consists of approximately 10.000 essays, which are written b
 
 You can 1) run a precompiled conda environment (hopefully on cuda), or 2) perform the manual installation.
 
-### Precompiled environment with Conda
+### Environment
+#### Precompiled environment with Conda
 
 ```bash
 TODO
 ```
 
-### Manual installation
+#### Manual environment installation
 
 Assuming you already have conda installed, run the following:
 
@@ -60,13 +61,24 @@ Finally install Pytorch based on you computer compatibilities following this gui
 
 *And can always find other compatible pytorch modules here: https://pytorch.org/get-started/previous-versions/*
 
-### Developer
+#### Developer
 
 If you want to make changes to the code and immediately see the effect, install the project in editable mode:
 
 ```bash
 pip install -e .
 ```
+
+### Download the data
+
+`TODO` do you need permission?
+
+```bash
+dvc pull
+```
+
+
+
 
 ---
 

@@ -1,0 +1,7 @@
+
+
+
+defaults:
+  - model: model_conf.yaml
+  - training: training_conf.yaml
+  - data: data_conf.yaml

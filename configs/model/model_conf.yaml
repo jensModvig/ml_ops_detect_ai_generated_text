@@ -1,0 +1,4 @@
+
+model_name: "distilbert-base-uncased"
+num_labels: 2
+max_seq_length: 128 # TODO:
