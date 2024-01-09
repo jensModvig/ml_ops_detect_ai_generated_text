@@ -21,6 +21,8 @@ def download_kaggle_data(raw_data_path, username, key):
     subprocess.run(['kaggle', 'competitions', 'download', '-c', 'llm-detect-ai-generated-text', '-p', download_folder])
 
 
+# dvc remote add -d storage gdrive://1apqcOMgmfkuDp4VGnCcmN6Bwx3dE1GC
+
 
 
 
