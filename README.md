@@ -78,6 +78,13 @@ dvc pull
 ```
 
 
+## Run
+
+
+### Sweep
+
+wandb sweep --project ml_ops_detect_ai_generated_text "./config/sweep/lr_sweep.yaml" 
+
 
 
 ---
