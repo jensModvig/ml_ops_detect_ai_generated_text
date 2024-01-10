@@ -68,6 +68,11 @@ def train_model(config):
     """
     current_datetime = datetime.now()
     now = current_datetime.strftime("%d-%m-%Y_%H:%M:%S")
+    # Chekc if an experiment is present (in struct)
+    if "experiment" in config:
+        # let parameters in the experiment file overwrite the config file
+        config = OmegaConf.merge(config, config.experiment)
+
 
     # Print the config
     print(f"configuration: \n {OmegaConf.to_yaml(config)}")

@@ -71,19 +71,63 @@ pip install -e .
 
 ### Download the data
 
-`TODO` do you need permission?
+*Request permission:* https://drive.google.com/drive/folders/1apqcOMgmfkuDp4VGnCcmN6Bwx3dE1GC-
 
+Then run:
 ```bash
 dvc pull
 ```
 
+### Initialize wandb
 
-## Run
+Login in to wandb:
+
+```bash
+wandb login
+```
+
+And paste the token from the website.
+
+
+## Run the scripts
+
+
+### Training
+
+
+
+#### Simple run
+
+Just run the script:
+
+```bash
+python ml_ops_detect_ai_generated_text/train_model.py
+```
+
+#### Run an experiment
+
+Follow this guide:
+1. Note that:
+      1. Experiments are configured in the `configs/` folder
+      2. Possible hyperparameters are defined in the `configs/models/` and `configs/training/`.
+2. You can define an experiments by:
+      1. Overwrite the possible hyperparameters in a `configs/experiment/*.yaml` file
+      2. Define this file in the `configs/config.yaml` file as: 
+           ```yaml
+           defaults:
+             - experiment: *.yaml
+           ```
+3. Then run: ```python ml_ops_detect_ai_generated_text/train_model.py```
 
 
 ### Sweep
 
+TODO:
+
+eg.?
+```
 wandb sweep --project ml_ops_detect_ai_generated_text "./config/sweep/lr_sweep.yaml" 
+```
 
 
 
