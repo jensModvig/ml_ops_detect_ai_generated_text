@@ -8,3 +8,5 @@ version_base: 1.2
 
 wandb:
   project: "ml_ops_detect_ai_generated_text"
+  team: "ml_ops_detect_ai_generated_text"
+  entity: "ml_ops_detect_ai_generated_text"

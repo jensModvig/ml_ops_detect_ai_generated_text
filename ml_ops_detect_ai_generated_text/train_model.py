@@ -33,6 +33,7 @@ def get_trainer(config, callbacks, experiment_name):
     """
     # Initialize a Lightning Trainer
     logger = pl.loggers.WandbLogger(
+        entity=config.wandb.entity,
         project=config.wandb.project,
         name=experiment_name)
     #
