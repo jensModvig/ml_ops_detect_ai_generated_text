@@ -106,7 +106,6 @@ def train_model(config):
     # save_path = model_path / exp_model_name
     # model.save_pretrained(save_path)
 
-    stop = 0
 
 
 if __name__ == "__main__":
