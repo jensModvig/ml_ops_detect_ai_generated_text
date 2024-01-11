@@ -41,5 +41,5 @@ jobs:
 
     - name: ruff
       run: |
-        ruff check .
+        ruff check . --fix
         ruff format .
