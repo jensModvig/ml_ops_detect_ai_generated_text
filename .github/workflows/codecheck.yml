@@ -1,6 +1,10 @@
 name: "Formatting PEP8"
 
-on: push
+on:
+  push:
+    branches:
+      - main
+      - unit_testing_and_workflows
   workflow_dispatch:
 
 jobs:

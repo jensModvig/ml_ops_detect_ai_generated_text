@@ -1,6 +1,10 @@
 name: "Run tests"
 
-on: push
+on:
+  push:
+    branches:
+      - main
+      - unit_testing_and_workflows
   workflow_dispatch:
 
 jobs:
