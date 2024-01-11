@@ -1,20 +1,20 @@
 name: "Formatting PEP8"
 
-on:
-  push:
-    branches:
-      - main
-      - unit_testing_and_workflows
-  workflow_dispatch:
+#on:
+#  push:
+#    branches:
+#      - main
+#      - unit_testing_and_workflows
+#  workflow_dispatch:
 
 # Reduced to only run on main branch for now
 # since we "only" got 2000 minutes per month
 # Also only test on linux for now    
-#on:
-#    push:
-#        branches: [ master, main ]
-#    pull_request:
-#        branches: [ master, main ]
+on:
+    push:
+        branches: [ master, main ]
+    pull_request:
+        branches: [ master, main ]
 
 jobs:
   build:
@@ -25,14 +25,14 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - name: Set up Python 3.11
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v3
       with:
         python-version: "3.11"
 
     - name: Cache Python dependencies
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: |
           ~/.cache/pip
