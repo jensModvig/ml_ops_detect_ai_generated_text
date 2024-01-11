@@ -1,6 +1,6 @@
 name: "Formatting PEP8"
 
-on:
+on: push
   workflow_dispatch:
 
 jobs:
