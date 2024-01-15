@@ -25,7 +25,15 @@ The initial dataset consists of approximately 10.000 essays, which are written b
 
 ---
 
-## Setup
+## From zero to hero using docker
+```
+pip install -r requirements.txt
+dvc pull
+docker compose up
+```
+
+## Old Setup
+
 
 You can 1) run a precompiled conda environment (hopefully on cuda), or 2) perform the manual installation.
 
