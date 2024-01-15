@@ -57,3 +57,10 @@ jobs:
     - name: Test with pytest
       run: |
         pytest tests/
+
+    - name: Generate Report
+      run: |
+        coverage run -m pytest tests/
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v2
+
