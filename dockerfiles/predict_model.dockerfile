@@ -7,11 +7,11 @@ RUN apt update && \
 
 COPY requirements.txt requirements.txt
 COPY pyproject.toml pyproject.toml
-COPY project_name/ project_name/
+COPY ml_ops_detect_ai_generated_text/ ml_ops_detect_ai_generated_text/
 COPY data/ data/
 
 WORKDIR /
 RUN pip install -r requirements.txt --no-cache-dir
 RUN pip install . --no-deps --no-cache-dir
 
-ENTRYPOINT ["python", "-u", "project_name/predict_model.py"]
+ENTRYPOINT ["python", "-u", "ml_ops_detect_ai_generated_text/predict_model.py"]
