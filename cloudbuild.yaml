@@ -1,5 +1,6 @@
 steps:
+- name: 'docker/compose:1.28.0'
+  args: ['up', '-d']
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/ml_ops_detect_ai_generated_text/trainer', '-f', 'dockerfile/trainer.dockerfile', '.']
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/ml_ops_detect_ai_generated_text/trainer']
+  args: ['tag', 'trainer:latest', 'gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA']
+images: ['gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA']
