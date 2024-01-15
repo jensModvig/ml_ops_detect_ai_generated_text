@@ -27,6 +27,7 @@ wandb
 dvc
 dvc[gdrive]
 dvc[gs]
+gcloud
 google-api-python-client
 mypy
 flake8
