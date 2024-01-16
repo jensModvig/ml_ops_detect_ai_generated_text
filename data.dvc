@@ -1,6 +1,67 @@
 outs:
-- md5: 5e6fbbc3386ff6663c82e659cd363f8e.dir
-  size: 15731319
-  nfiles: 9
-  hash: md5
+- hash: md5
   path: data
+  files:
+  - relpath: processed/.gitkeep
+    md5: d41d8cd98f00b204e9800998ecf8427e
+    size: 0
+    cloud:
+      remote_storage:
+        etag: 08cb87d986eee183031001
+        version_id: '1705406436361163'
+  - relpath: processed/llm-detect-ai-generated-text/test_dataset.pt
+    md5: c3066c7997945e7bc7954d725f7d8197
+    size: 1141559
+    cloud:
+      remote_storage:
+        etag: 08a0a18187eee183031001
+        version_id: '1705406437019808'
+  - relpath: processed/llm-detect-ai-generated-text/train_dataset.pt
+    md5: e45d2b50a8fac3ff9af9caaf16fdb92b
+    size: 9038142
+    cloud:
+      remote_storage:
+        etag: 0894c0dc88eee183031001
+        version_id: '1705406440611860'
+  - relpath: processed/llm-detect-ai-generated-text/val_dataset.pt
+    md5: cdb31d10fe4f107dd5a0aef5e10ec69b
+    size: 1125168
+    cloud:
+      remote_storage:
+        etag: 08b0e88c87eee183031001
+        version_id: '1705406437209136'
+  - relpath: raw/.gitkeep
+    md5: d41d8cd98f00b204e9800998ecf8427e
+    size: 0
+    cloud:
+      remote_storage:
+        etag: 08bbdde486eee183031001
+        version_id: '1705406436552379'
+  - relpath: raw/llm-detect-ai-generated-text/sample_submission.csv
+    md5: e1c597e03d2863c7940324258e21a678
+    size: 52
+    cloud:
+      remote_storage:
+        etag: 08c6f9eb86eee183031001
+        version_id: '1705406436670662'
+  - relpath: raw/llm-detect-ai-generated-text/test_essays.csv
+    md5: 0006117a515346ba90a89c5dfa94c1c8
+    size: 90
+    cloud:
+      remote_storage:
+        etag: 089db7eb86eee183031001
+        version_id: '1705406436662173'
+  - relpath: raw/llm-detect-ai-generated-text/train_essays.csv
+    md5: 6eb9bab16019d83c8b97cd8bee52b09a
+    size: 4399547
+    cloud:
+      remote_storage:
+        etag: 08f9e7ad87eee183031001
+        version_id: '1705406437749753'
+  - relpath: raw/llm-detect-ai-generated-text/train_prompts.csv
+    md5: cb7ac6b3831ef4fd15c51ff63340cb91
+    size: 26761
+    cloud:
+      remote_storage:
+        etag: 088e83ed86eee183031001
+        version_id: '1705406436688270'
