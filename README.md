@@ -229,10 +229,10 @@ started with Machine Learning Operations (MLOps).
 
 ### Week 2
 
-* [ ] Write unit tests related to the data part of your code
+* [x] Write unit tests related to the data part of your code
 * [ ] Write unit tests related to model construction and or model training
-* [ ] Calculate the coverage.
-* [ ] Get some continuous integration running on the github repository
+* [x] Calculate the coverage.
+* [x] Get some continuous integration running on the github repository
 * [ ] Create a data storage in GCP Bucket for you data and preferable link this with your data version control setup
 * [ ] Create a trigger workflow for automatically building your docker images
 * [ ] Get your model training in GCP using either the Engine or Vertex AI

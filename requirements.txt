@@ -33,3 +33,7 @@ flake8
 
 torch_tb_profiler
 
+# deployment
+streamlit
+fastapi
+
