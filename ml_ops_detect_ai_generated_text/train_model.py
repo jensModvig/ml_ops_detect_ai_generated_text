@@ -12,6 +12,8 @@ from utilities import get_paths
 from data.dataloaders import get_dataloaders
 from models.model import TextClassificationModel
 
+os.environ["HYDRA_FULL_ERROR"] = "1" # Show full error trace for debugging
+
 
 def get_callbacks(model_path, model_name):
     checkpoint_callback = ModelCheckpoint(
