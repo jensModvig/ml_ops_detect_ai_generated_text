@@ -4,7 +4,7 @@ data_path: "processed/llm-detect-ai-generated-text"
 
 
 #
-max_epochs: 1
+max_epochs: 10
 max_steps: 10
 use: "epochs"
 #use: "steps"

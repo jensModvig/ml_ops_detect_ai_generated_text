@@ -1,7 +1,8 @@
 # project folders
 docs/site/
-/data/*
-!/data/.gitkeep
+data/*
+!data/
+!data/.gitkeep
 models/
 outputs/
 wandb/

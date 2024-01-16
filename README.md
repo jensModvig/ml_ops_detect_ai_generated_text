@@ -25,9 +25,9 @@ The initial dataset consists of approximately 10.000 essays, which are written b
 
 ## Deployment
 To perform inference using the model, please visit:
-```
+
 https://mlopsdetectaigeneratedtext.streamlit.app/
-```
+
 
 ---
 

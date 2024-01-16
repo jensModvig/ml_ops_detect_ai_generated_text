@@ -8,9 +8,9 @@ import pytorch_lightning as pl
 from pytorch_lightning.callbacks import ModelCheckpoint, EarlyStopping
 import wandb
 
-from ml_ops_detect_ai_generated_text.utilities import get_paths
-from ml_ops_detect_ai_generated_text.data.dataloaders import get_dataloaders
-from ml_ops_detect_ai_generated_text.models.model import TextClassificationModel
+from utilities import get_paths
+from data.dataloaders import get_dataloaders
+from models.model import TextClassificationModel
 
 
 def get_callbacks(model_path, model_name):
@@ -67,7 +67,7 @@ def train_model(config):
     - Saving the model
     """
     current_datetime = datetime.now()
-    now = current_datetime.strftime("%d-%m-%Y_%H:%M:%S")
+    now = current_datetime.strftime("%d_%m_%Y_%H_%M_%S")
     # Chekc if an experiment is present (in struct)
     if "experiment" in config:
         # let parameters in the experiment file overwrite the config file
@@ -92,7 +92,7 @@ def train_model(config):
     train_loader, val_loader = get_dataloaders(processed_data_path, config)
 
     # Initialize a Lightning Trainer
-    model_path = model_path / now
+    model_path = f"{model_path}/{now}"
     # Create a unique model name
     experiment_name = now
     callbacks = get_callbacks(model_path, model_name=config.model.model_name)
@@ -103,7 +103,7 @@ def train_model(config):
 
     # NOTE: lightning saves the model automatically
     # Save the model
-    # save_path = model_path / exp_model_name
+    #save_path = model_path / exp_model_name
     # model.save_pretrained(save_path)
 
 
