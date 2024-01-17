@@ -189,8 +189,11 @@ Finally install Pytorch based on you computer compatibilities following this gui
 > *because we did not use any ... in our project. We have added an ... folder that contains ... for running our*
 > *experiments.*
 > Answer:
+> 
+In our project, we adopted the cookiecutter data science template as the foundational structure. Key files such as predict_model.py and train_model.py were developed, along with additional utility files, for instance, ml_ops_detect_ai_generated_text /data/init.py, which is responsible for dataset construction. The make_dataset.py file was left unfilled since our data necessitated minimal preprocessing, which we opted to perform during runtime instead
+> We have included a folder named 'tests', which contains our unit tests related to the data and the model. Additionally, a '.dvc' folder has been created to hold metadata files associated with data versioning, utilizing cloud services.
 
---- question 5 fill here ---
+
 
 ### Question 6
 
@@ -253,7 +256,8 @@ In larger project with a big team collaborating, ensure a cohesive formatting he
 >
 > Answer:
 
---- question 9 fill here ---
+During our project, we used the technique of involving both branches and pull requests. Whenever a new feature was under development or testing, we initiated a separate branch for it. Upon completion of the feature, we would create a pull request to merge this feature branch back into the main branch. As a standard practice, we ensured that the pull requests were always reviewed and approved by a different member of the group. This approach was used to make sure that theres collaboration and to maintain a review process.
+
 
 ### Question 10
 
@@ -302,8 +306,8 @@ In larger project with a big team collaborating, ensure a cohesive formatting he
 > *We used a simple argparser, that worked in the following way: python my_script.py --lr 1e-3 --batch_size 25*
 >
 > Answer:
+The hyperparameter values were defined in hydra configuration files, and we integrated a hydra decorator into the 'train' function of the train_model.py file. This integration facilitated the insertion of hyperparameters and enabled the logging of both experiment performance and the hyperparameters utilized. To initiate an experiment, the command 'make train' was executed in the root directory, which subsequently activated train_model.py. Alternatively, running 'python train_model.py' directly would produce an identical outcome.
 
---- question 12 fill here ---
 
 ### Question 13
 
