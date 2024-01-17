@@ -12,6 +12,16 @@ from ml_ops_detect_ai_generated_text.utilities import get_paths
 
 
 def clean_text(text: str) -> str:
+    """
+    Clean the text by removing unnecessary spaces and lower casing it.
+
+    Parameters:
+        text (str): Text to be cleaned.
+
+    Returns:
+        str: Cleaned text.
+    """
+
     # RE to remove unnecessary spaces, keep single
     cleaned_text = re.sub(" +", " ", text)
     # lower case
@@ -19,7 +29,18 @@ def clean_text(text: str) -> str:
     return cleaned_text
 
 
-def process_data(raw_data_path, processed_data_path):
+def process_data(raw_data_path: str, processed_data_path: str) -> None:
+    """
+    Process the raw data into a cleaned format.
+    And store it as train, val and test data.
+
+    Parameters:
+        raw_data_path (str): Path to the raw data directory.
+        processed_data_path (str): Path to the processed data directory.
+    
+    Returns:
+        None
+    """
 
     np.random.seed(42)
 
