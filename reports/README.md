@@ -306,7 +306,7 @@ During our project, we used the technique of involving both branches and pull re
 > *We used a simple argparser, that worked in the following way: python my_script.py --lr 1e-3 --batch_size 25*
 >
 > Answer:
-The hyperparameter values were defined in hydra configuration files, and we integrated a hydra decorator into the 'train' function of the train_model.py file. This integration facilitated the insertion of hyperparameters and enabled the logging of both experiment performance and the hyperparameters utilized. To initiate an experiment, the command 'make train' was executed in the root directory, which subsequently activated train_model.py. Alternatively, running 'python train_model.py' directly would produce an identical outcome.
+The hyperparameter values were defined in hydra configuration files, and we integrated a hydra decorator into the 'train' function of the train_model.py file. This integration facilitated the insertion of hyperparameters and enabled the logging of both experiment performance and the hyperparameters utilized. To initiate an experiment.To run the function, just write in the terminal 'python ml_ops_detect_ai_generated_text/train_model.py' directly would produce the outcome.
 
 
 ### Question 13
@@ -322,7 +322,7 @@ The hyperparameter values were defined in hydra configuration files, and we inte
 >
 > Answer:
 
---- question 13 fill here ---
+Configuration files play a crucial role in our setup. These files help in clearly linking hyperparameters with the corresponding model performance, leaving no ambiguity. Additionally, DVC is implemented to ensure data consistency across different machines. Furthermore, the use of Docker facilitates the creation of a stable environment, maintaining specific library versions, dependencies, and packages. This setup is vital to prevent any variations in library behaviors from impacting our results.We couldn't achieve complete reproducibility was in random processes, such as the shuffling of batches, since we didn't regulate these with seeds. Moreover, it's important to mention that even when seeds are used, PyTorch doesn't ensure the outputs will be exactly the same every time.
 
 ### Question 14
 
@@ -338,6 +338,7 @@ The hyperparameter values were defined in hydra configuration files, and we inte
 > *As seen in the second image we are also tracking ... and ...*
 >
 > Answer:
+![image](https://github.com/DanielHolmelund/ml_ops_detect_ai_generated_text/assets/114672733/43d1aec0-9f3f-45f7-ab2e-58c8cf92aa7d)
 
 --- question 14 fill here ---
 
@@ -353,8 +354,12 @@ The hyperparameter values were defined in hydra configuration files, and we inte
 > *training docker image: `docker run trainer:latest lr=1e-3 batch_size=64`. Link to docker file: <weblink>*
 >
 > Answer:
+The trainer.dockerfile defines an image that we utilized for local model training, using data we already had. This process saved the trained model's state in a shared folder.
 
---- question 15 fill here ---
+On the other hand, predict.dockerfile's image was responsible for loading this saved model state, running tests on some pre-existing data, and then calculating the model's accuracy. These two dockerfiles, used for local deployment, mainly differ in their initial commands: one initiates the training process while the other focuses on evaluation.
+
+For deployment on Google Cloud Platform (GCP), we used the dockerfile located in api/gcp_run/dockerfile. Unlike the others, this one doesn’t specify an entry point; it uses the CMD command to launch the inference API.
+
 
 ### Question 16
 
@@ -508,6 +513,7 @@ The hyperparameter values were defined in hydra configuration files, and we inte
 >
 > Answer:
 
+Configuring our deployment setup and getting everything up and running on Google Cloud turned out to be the toughest and most time-consuming task for us. A lot of this difficulty came from our team's relative unfamiliarity with Google Cloud's machine learning features – even just getting the hang of the interface was quite a task. We had to rely heavily on a mix of trial and error, along with a lot of detailed reading of tutorials and guides, to get our whole pipeline operational. It was a bit of a journey, but in the end, we managed to get everything working as intended.
 --- question 26 fill here ---
 
 ### Question 27
@@ -524,5 +530,14 @@ The hyperparameter values were defined in hydra configuration files, and we inte
 > *All members contributed to code by...*
 >
 > Answer:
+In general students contributed equally to the project, and we often worked side-by-side. Everyone worked on the documentation of the project as well.
+
+In case specific contributions are needed:
+
+s194245
+s194262
+s194264
+Pavlos Adamakis-s222968
+s173955 
 
 --- question 27 fill here ---
