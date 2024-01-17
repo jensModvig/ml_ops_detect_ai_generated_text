@@ -442,6 +442,10 @@ For building and deploying the inference API, we employed Cloud Run and Cloud Fu
 >
 > Answer:
 
+![image](https://github.com/DanielHolmelund/ml_ops_detect_ai_generated_text/assets/114672733/1936c4ce-eba0-43e0-bc04-9695ade2c7c9)
+
+
+
 --- question 21 fill here ---
 
 ### Question 22
@@ -474,7 +478,8 @@ For building and deploying the inference API, we employed Cloud Run and Cloud Fu
 > Answer:
 
 In general, this subject wasn't given top priority in monitoring because Google Cloud appears to be quite comprehensive in its monitoring capabilities, covering aspects like security, user activity, and performance. Moreover, there's an option to establish a maximum on the number of requests.
-Additionally, "Cloud Armor Network Security" offers safeguards against threats such as DDoS attacks. Due to limited time..
+Additionally, "Cloud Armor Network Security" offers safeguards against threats such as DDoS attacks. Due to limited time.
+
 --- question 23 fill here ---
 
 ### Question 24
@@ -525,6 +530,8 @@ Additionally, "Cloud Armor Network Security" offers safeguards against threats s
 > Answer:
 
 Configuring our deployment setup and getting everything up and running on Google Cloud turned out to be the toughest and most time-consuming task for us. A lot of this difficulty came from our team's relative unfamiliarity with Google Cloud's machine learning features – even just getting the hang of the interface was quite a task. We had to rely heavily on a mix of trial and error, along with a lot of detailed reading of tutorials and guides, to get our whole pipeline operational. It was a bit of a journey, but in the end, we managed to get everything working as intended.
+
+
 --- question 26 fill here ---
 
 ### Question 27
@@ -546,9 +553,13 @@ In general students contributed equally to the project, and we often worked side
 In case specific contributions are needed:
 
 s194245
+
 s194262
+
 s194264
+
 Pavlos Adamakis-s222968
+
 s173955 
 
 --- question 27 fill here ---
