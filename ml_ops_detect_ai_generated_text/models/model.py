@@ -5,7 +5,7 @@ from sklearn.metrics import roc_curve, auc
 
 
 class TextClassificationModel(pl.LightningModule):
-    def __init__(self, model_name=None, num_labels=None, learning_rate=None):
+    def __init__(self, model_name=None, num_labels=None, learning_rate=None) -> None:
         super(TextClassificationModel, self).__init__()
         self.model_name = model_name
         # Using a pretrained distilbert model, with a single linear layer on
@@ -18,7 +18,7 @@ class TextClassificationModel(pl.LightningModule):
         for param in self.model.classifier.parameters():
             param.requires_grad = True
         #
-        # self.tokenizer = DistilBertTokenizer.from_pretrained(model_name) #
+        self.tokenizer = DistilBertTokenizer.from_pretrained(model_name) #
         # NOTE: used?
         self.learning_rate = learning_rate
         self.criterion = torch.nn.CrossEntropyLoss()

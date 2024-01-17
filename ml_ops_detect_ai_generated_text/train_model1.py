@@ -13,7 +13,18 @@ from data.dataloaders import get_dataloaders
 from models.model import TextClassificationModel
 
 
-def get_callbacks(model_path, model_name):
+def get_callbacks(model_path: str, model_name: str) -> list:
+    """
+    Get a list of PyTorch Lightning callbacks for model training.
+
+    Parameters:
+    - model_path (str): Path to the directory for saving model checkpoints.
+    - model_name (str): Name of the model.
+
+    Returns:
+    - List: List of PyTorch Lightning callbacks.
+    """
+
     checkpoint_callback = ModelCheckpoint(
         dirpath=model_path,
         filename=model_name + "-{epoch:02d}-{val_loss:.2f}",
@@ -27,9 +38,17 @@ def get_callbacks(model_path, model_name):
     return [checkpoint_callback, early_stopping_callback]
 
 
-def get_trainer(config, callbacks, experiment_name):
+def get_trainer(config: dict, callbacks: list, experiment_name: str) -> pl.Trainer:
     """
     Get a PyTorch Lightning Trainer object based on the config
+
+    Parameters:
+    - config (dict): Configuration dictionary containing parameters.
+    - callbacks (list): List of callbacks to use.
+    - experiment_name (str): Name of the experiment.
+
+    Returns:
+    - trainer (Trainer): PyTorch Lightning Trainer object.
     """
     # Initialize a Lightning Trainer
     logger = pl.loggers.WandbLogger(
@@ -57,9 +76,15 @@ def get_trainer(config, callbacks, experiment_name):
 
 
 
-def hydra_path_2_save_path(model_path):
+def hydra_path_2_save_path(model_path: str):
     """
-    Get the path to the hydra directory and construct model paths
+    Get the path to the hydra directory and construct model paths.
+
+    Parameters:
+    - model_path (str): Path to the model directory.
+
+    Returns:
+    - model_path (str): Path to the model directory.
     """
     # Get the path to the hydra directory
     hydra_cfg = hydra.core.hydra_config.HydraConfig.get()
