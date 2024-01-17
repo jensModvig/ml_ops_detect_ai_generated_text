@@ -391,7 +391,12 @@ For deployment on Google Cloud Platform (GCP), we used the dockerfile located in
 >
 > Answer:
 
---- question 17 fill here ---
+On the Google Cloud Platform, we utilized a variety of services. For remote storage of our data and Docker images, we relied on Cloud Storage. Additionally, we established a GCP Bucket, designated as the remote repository for our data version control, allowing us to efficiently push to and pull data from the cloud.
+
+We configured triggers to automate the building of trainer and predictor Docker images. These triggers were activated by any push to the main branch of our cloud repository, which mirrors our git repository. All the container images created throughout the project were stored and are accessible in the Container Registry.
+
+For building and deploying the inference API, we employed Cloud Run and Cloud Functions, leveraging their capabilities for our project's needs.
+
 
 ### Question 18
 
@@ -405,7 +410,7 @@ For deployment on Google Cloud Platform (GCP), we used the dockerfile located in
 > *using a custom container: ...*
 >
 > Answer:
-
+ Vertex AI in google cloud,is meant to be used for training the model in the cloud. 
 --- question 18 fill here ---
 
 ### Question 19
@@ -464,6 +469,8 @@ For deployment on Google Cloud Platform (GCP), we used the dockerfile located in
 >
 > Answer:
 
+In general, this subject wasn't given top priority in monitoring because Google Cloud appears to be quite comprehensive in its monitoring capabilities, covering aspects like security, user activity, and performance. Moreover, there's an option to establish a maximum on the number of requests.
+Additionally, "Cloud Armor Network Security" offers safeguards against threats such as DDoS attacks. Due to limited time..
 --- question 23 fill here ---
 
 ### Question 24
