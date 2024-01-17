@@ -12,10 +12,19 @@ from utilities import get_paths
 from data.dataloaders import get_dataloaders
 from models.model import TextClassificationModel
 
-os.environ["HYDRA_FULL_ERROR"] = "1" # Show full error trace for debugging
 
+def get_callbacks(model_path: str, model_name: str) -> list:
+    """
+    Get a list of PyTorch Lightning callbacks for model training.
 
-def get_callbacks(model_path, model_name):
+    Parameters:
+    - model_path (str): Path to the directory for saving model checkpoints.
+    - model_name (str): Name of the model.
+
+    Returns:
+    - List: List of PyTorch Lightning callbacks.
+    """
+
     checkpoint_callback = ModelCheckpoint(
         dirpath=model_path,
         filename=model_name + "-{epoch:02d}-{val_loss:.2f}",
@@ -29,9 +38,17 @@ def get_callbacks(model_path, model_name):
     return [checkpoint_callback, early_stopping_callback]
 
 
-def get_trainer(config, callbacks, experiment_name):
+def get_trainer(config: dict, callbacks: list, experiment_name: str) -> pl.Trainer:
     """
     Get a PyTorch Lightning Trainer object based on the config
+
+    Parameters:
+    - config (dict): Configuration dictionary containing parameters.
+    - callbacks (list): List of callbacks to use.
+    - experiment_name (str): Name of the experiment.
+
+    Returns:
+    - trainer (Trainer): PyTorch Lightning Trainer object.
     """
     # Initialize a Lightning Trainer
     logger = pl.loggers.WandbLogger(
@@ -58,6 +75,48 @@ def get_trainer(config, callbacks, experiment_name):
     return trainer
 
 
+
+def hydra_path_2_save_path(model_path: str) -> str:
+    """
+    Get the path to the hydra directory and construct model paths.
+
+    Parameters:
+    - model_path (str): Path to the model directory.
+
+    Returns:
+    - model_path (str): Path to the model directory.
+    """
+    # Get the path to the hydra directory
+    hydra_cfg = hydra.core.hydra_config.HydraConfig.get()
+    output_path = hydra_cfg['runtime']['output_dir']
+    # extract elements from the path and assign them to variables
+    experiment_name = "_".join(output_path.split(os.sep)[-2:])
+    model_path = model_path / os.sep.join(output_path.split(os.sep)[-2:])
+    # create model_path if it does not exist
+    if not os.path.exists(model_path):
+        os.makedirs(model_path)
+    return model_path, experiment_name
+
+
+def prepare_wandb():
+    """
+    Prepare WandB for logging.
+
+    """
+    # Check if logged in
+    if wandb.run is None:
+        try:
+            # Check if WANDB_API_KEY environment variable is set
+            if 'WANDB_API_KEY' in os.environ:
+                # Set up WandB with the API key
+                wandb.login(key=os.environ['WANDB_API_KEY'])
+            else:
+                raise ValueError("WANDB_API_KEY environment variable not set.")
+        except:
+            raise ValueError("Failed to log in to WandB. Check your API key.")
+
+
+
 @hydra.main(config_path="../configs",
             config_name="config.yaml", version_base="1.2")
 def train_model(config):
@@ -68,8 +127,9 @@ def train_model(config):
     - Training the model
     - Saving the model
     """
-    current_datetime = datetime.now()
-    now = current_datetime.strftime("%d_%m_%Y_%H_%M_%S")
+
+    #current_datetime = datetime.now()
+    #now = current_datetime.strftime("%d-%m-%Y_%H:%M:%S")
     # Chekc if an experiment is present (in struct)
     if "experiment" in config:
         # let parameters in the experiment file overwrite the config file
@@ -78,6 +138,9 @@ def train_model(config):
 
     # Print the config
     print(f"configuration: \n {OmegaConf.to_yaml(config)}")
+
+    # Prepare wandb
+    #prepare_wandb()
 
     # Manage paths
     repo_path, data_path, model_path = get_paths()
@@ -94,9 +157,8 @@ def train_model(config):
     train_loader, val_loader = get_dataloaders(processed_data_path, config)
 
     # Initialize a Lightning Trainer
-    model_path = f"{model_path}/{now}"
+    model_path, experiment_name = hydra_path_2_save_path(model_path)
     # Create a unique model name
-    experiment_name = now
     callbacks = get_callbacks(model_path, model_name=config.model.model_name)
     trainer = get_trainer(config, callbacks, experiment_name)
 
@@ -105,7 +167,7 @@ def train_model(config):
 
     # NOTE: lightning saves the model automatically
     # Save the model
-    #save_path = model_path / exp_model_name
+    # save_path = model_path / exp_model_name
     # model.save_pretrained(save_path)
 
 

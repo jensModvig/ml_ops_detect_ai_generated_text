@@ -169,39 +169,13 @@ wandb sweep --project ml_ops_detect_ai_generated_text "./config/sweep/lr_sweep.y
 
 ### Train a model
 
-1. Make sure the docker file is working locally: 
+
+1. Create a Google Compute Engine (GCE)
+2. SSH into that GCE (Google Compute Engine), git clone, install dependencies, dvc pull, wandb login, etc
+3. Start training by:
       ```bash
-      # build image
-      docker build -t trainer:latest -f dockerfiles/train_model.dockerfile .
-      # run container
-      # we set the wandb api key as an environment variable
-      docker run -e WANDB_API_KEY=<your_api_key> --name trainer-container -d trainer:latest
+      python ml_ops_detect_ai_generated_text/train_model.py training.model_path=gs://mlops_model_unique/models/ 
       ```
-      1. *You can find the API key under your wandb user settings*
-2. Push to GCP:
-      ```bash
-      docker tag gcp_vm_tester gcr.io/<project-id>/trainer
-      docker push gcr.io/<project-id>/trainer
-      ```
-      1. Confirm by going to the container registry
-3. Run the image:
-      1. Create a Google Compute Engine (GCE)
-      2. SSH into that GCE (Google Compute Engine)
-      3. Run the docker container:
-            ```bash
-            docker run -e WANDB_API_KEY=<your_api_key> --name trainer-container -d gcr.io/<project-id>/trainer:latest training.model_path=gs://<bucket-name>/models/ 
-            ```
-
-docker run -e WANDB_API_KEY=dd1f2bbf51b8f93e069c89e9798703b40430999b --name trainer-container -d gcr.io/dtumlops-410913/trainer:latest training.model_path=gs://mlops_model_unique/models/ 
-
-docker run -e WANDB_API_KEY=dd1f2bbf51b8f93e069c89e9798703b40430999b --name trainer-container -d trainer:latest
-
-docker tag trainer gcr.io/dtumlops-410913/trainer
-
-docker push gcr.io/dtumlops-410913/trainer
-
-docker run -e WANDB_API_KEY=dd1f2bbf51b8f93e069c89e9798703b40430999b --name trainer-container -d trainer:latest
-
 
 ---
 

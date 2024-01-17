@@ -6,7 +6,7 @@ This script containes utility functions for the project.
 """
 
 
-def get_paths() -> tuple:
+def get_paths(config) -> tuple:
     """
     Get the paths to the repository, data, and model directories.
 
@@ -15,9 +15,16 @@ def get_paths() -> tuple:
     """
 
     repo_path = Path(__file__).resolve().parents[1]
-    data_path = repo_path / "data"
-    model_path = repo_path / "models"
+    if config.training.data_bucket == "":
+        data_path = repo_path / "data"
+    else:
+        data_path = Path(config.training.data_bucket) / "data"
 
+    if config.training.model_bucket == "":
+        model_path = repo_path / "models"
+    else:
+        model_path = Path(config.training.model_bucket) / "models"
+        
     return repo_path, data_path, model_path
 
 def run_profiling():

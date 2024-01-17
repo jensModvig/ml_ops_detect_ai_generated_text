@@ -1,7 +1,8 @@
 seed: 42
 model_path: "models/"
+model_bucker: ""
 data_path: "processed/llm-detect-ai-generated-text"
-
+data_bucket: ""
 
 #
 max_epochs: 10
