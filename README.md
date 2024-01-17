@@ -143,6 +143,64 @@ eg.?
 wandb sweep --project ml_ops_detect_ai_generated_text "./config/sweep/lr_sweep.yaml" 
 ```
 
+---
+
+## GCP setup
+
+### Activate it
+
+1. Login: `gcloud auth login`
+2. CLI: `gcloud auth application-default login`
+3. Set project: 
+      1. Available projects: `gcloud projects list`
+      2. Select a project and run: `gcloud config set project <project-id>`
+4. Install dependency: `pip install --upgrade google-api-python-client`
+
+### Data bucket
+
+1. Create a data bucket, is it visible: `gsutil ls`
+2. Assuming configured DVC, reconfigure it to: 
+      ```bash
+      dvc remote add -d remote_storage <output-from-gsutils>
+      dvc remote modify remote_storage version_aware true
+      ```
+3. Push it: `dvc push -r remote_storage`
+      1. Failing? try `dvc add data` and follow error specifications
+
+### Train a model
+
+1. Make sure the docker file is working locally: 
+      ```bash
+      # build image
+      docker build -t trainer:latest -f dockerfiles/train_model.dockerfile .
+      # run container
+      # we set the wandb api key as an environment variable
+      docker run -e WANDB_API_KEY=<your_api_key> --name trainer-container -d trainer:latest
+      ```
+      1. *You can find the API key under your wandb user settings*
+2. Push to GCP:
+      ```bash
+      docker tag gcp_vm_tester gcr.io/<project-id>/trainer
+      docker push gcr.io/<project-id>/trainer
+      ```
+      1. Confirm by going to the container registry
+3. Run the image:
+      1. Create a Google Compute Engine (GCE)
+      2. SSH into that GCE (Google Compute Engine)
+      3. Run the docker container:
+            ```bash
+            docker run -e WANDB_API_KEY=<your_api_key> --name trainer-container -d gcr.io/<project-id>/trainer:latest training.model_path=gs://<bucket-name>/models/ 
+            ```
+
+docker run -e WANDB_API_KEY=dd1f2bbf51b8f93e069c89e9798703b40430999b --name trainer-container -d gcr.io/dtumlops-410913/trainer:latest training.model_path=gs://mlops_model_unique/models/ 
+
+docker run -e WANDB_API_KEY=dd1f2bbf51b8f93e069c89e9798703b40430999b --name trainer-container -d trainer:latest
+
+docker tag trainer gcr.io/dtumlops-410913/trainer
+
+docker push gcr.io/dtumlops-410913/trainer
+
+docker run -e WANDB_API_KEY=dd1f2bbf51b8f93e069c89e9798703b40430999b --name trainer-container -d trainer:latest
 
 
 ---
@@ -210,57 +268,4 @@ started with Machine Learning Operations (MLOps).
 
 ---
 
-# Checklist 
-### Week 1
-
-* [x] Create a git repository
-* [x] Make sure that all team members have write access to the github repository
-* [x] Create a dedicated environment for you project to keep track of your packages
-* [x] Create the initial file structure using cookiecutter
-* [x] Fill out the `make_dataset.py` file such that it downloads whatever data you need and
-* [x] Add a model file and a training script and get that running
-* [x] Remember to fill out the `requirements.txt` file with whatever dependencies that you are using
-* [x] Remember to comply with good coding practices (`pep8`) while doing the project
-* [x] Do a bit of code typing and remember to document essential parts of your code
-* [x] Setup version control for your data or part of your data
-* [ ] Construct one or multiple docker files for your code
-* [ ] Build the docker files locally and make sure they work as intended
-* [x] Write one or multiple configurations files for your experiments
-* [x] Used Hydra to load the configurations and manage your hyperparameters
-* [x] When you have something that works somewhat, remember at some point to to some profiling and see if
-      you can optimize your code
-* [x] Use Weights & Biases to log training progress and other important metrics/artifacts in your code. Additionally,
-      consider running a hyperparameter optimization sweep.
-* [x] Use Pytorch-lightning (if applicable) to reduce the amount of boilerplate in your code
-
-### Week 2
-
-* [x] Write unit tests related to the data part of your code
-* [x] Write unit tests related to model construction and or model training
-* [x] Calculate the coverage (currently: 64%).
-* [x] Get some continuous integration running on the github repository
-* [ ] Create a data storage in GCP Bucket for you data and preferable link this with your data version control setup
-* [ ] Create a trigger workflow for automatically building your docker images
-* [ ] Get your model training in GCP using either the Engine or Vertex AI
-* [ ] Create a FastAPI application that can do inference using your model
-* [ ] If applicable, consider deploying the model locally using torchserve
-* [ ] Deploy your model in GCP using either Functions or Run as the backend
-
-### Week 3
-
-* [ ] Check how robust your model is towards data drifting
-* [ ] Setup monitoring for the system telemetry of your deployed model
-* [ ] Setup monitoring for the performance of your deployed model
-* [ ] If applicable, play around with distributed data loading
-* [ ] If applicable, play around with distributed model training
-* [ ] Play around with quantization, compilation and pruning for you trained models to increase inference speed
-
-### Additional
-
-* [ ] Revisit your initial project description. Did the project turn out as you wanted?
-* [ ] Make sure all group members have a understanding about all parts of the project
-* [ ] Uploaded all your code to github
-
-Created using [mlops_template](https://github.com/SkafteNicki/mlops_template),
-a [cookiecutter template](https://github.com/cookiecutter/cookiecutter) for getting
-started with Machine Learning Operations (MLOps).
+*NOTE:* The check-list is in `reports/readme.md`

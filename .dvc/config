@@ -4,5 +4,5 @@
 ['remote "storage"']
     url = gdrive://1apqcOMgmfkuDp4VGnCcmN6Bwx3dE1GC-
 ['remote "remote_storage"']
-    url = gs://mlops-project-bucket21/
+    url = gs://mlops_data_unique_name/
     version_aware = true

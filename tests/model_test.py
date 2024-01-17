@@ -17,7 +17,7 @@ def test_model():
 
         # Dummy data
         text = "This is a test"
-        label = 0
+        #label = 0
 
         # Tokenize
         inputs = tokenizer(text, return_tensors="pt")

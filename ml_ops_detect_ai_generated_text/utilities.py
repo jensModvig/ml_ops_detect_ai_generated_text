@@ -37,13 +37,13 @@ def run_profiling():
     tokenizer = model.tokenizer
     # Dummy data, e.g. 5 sentences
     texts = ["This is a test"] * 5
-    labels = [0] * 5
+    #labels = [0] * 5
     # Tokenize
     inputs = tokenizer(texts, return_tensors="pt")
     # Forward pass
     with profile(activities=[ProfilerActivity.CPU], record_shapes=True) as prof:
         outputs = model(**inputs)
-        logits = outputs.logits
+        #logits = outputs.logits
 
     print(prof.key_averages().table(sort_by="cpu_time_total", row_limit=10))
     prof.export_chrome_trace("outputs/profiling/trace.json")
@@ -62,7 +62,7 @@ def run_profiling():
     pr = cProfile.Profile()
     pr.enable()
     outputs = model(**inputs)
-    logits = outputs.logits
+    #logits = outputs.logits
     pr.disable()
     s = StringIO()
     sortby = "cumulative"

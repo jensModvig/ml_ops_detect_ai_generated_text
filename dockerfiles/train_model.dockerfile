@@ -9,6 +9,7 @@ COPY requirements.txt requirements.txt
 COPY pyproject.toml pyproject.toml
 COPY ml_ops_detect_ai_generated_text/ ml_ops_detect_ai_generated_text/
 COPY data/ data/
+COPY configs/ configs/
 
 WORKDIR /
 RUN pip install -r requirements.txt --no-cache-dir

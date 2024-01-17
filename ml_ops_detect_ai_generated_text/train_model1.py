@@ -76,7 +76,7 @@ def get_trainer(config: dict, callbacks: list, experiment_name: str) -> pl.Train
 
 
 
-def hydra_path_2_save_path(model_path: str):
+def hydra_path_2_save_path(model_path: str) -> str:
     """
     Get the path to the hydra directory and construct model paths.
 
@@ -96,6 +96,24 @@ def hydra_path_2_save_path(model_path: str):
     if not os.path.exists(model_path):
         os.makedirs(model_path)
     return model_path, experiment_name
+
+
+def prepare_wandb():
+    """
+    Prepare WandB for logging.
+
+    """
+    # Check if logged in
+    if wandb.run is None:
+        try:
+            # Check if WANDB_API_KEY environment variable is set
+            if 'WANDB_API_KEY' in os.environ:
+                # Set up WandB with the API key
+                wandb.login(key=os.environ['WANDB_API_KEY'])
+            else:
+                raise ValueError("WANDB_API_KEY environment variable not set.")
+        except:
+            raise ValueError("Failed to log in to WandB. Check your API key.")
 
 
 
@@ -120,6 +138,9 @@ def train_model(config):
 
     # Print the config
     print(f"configuration: \n {OmegaConf.to_yaml(config)}")
+
+    # Prepare wandb
+    #prepare_wandb()
 
     # Manage paths
     repo_path, data_path, model_path = get_paths()
