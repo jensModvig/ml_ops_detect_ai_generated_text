@@ -256,7 +256,7 @@ In larger project with a big team collaborating, ensure a cohesive formatting he
 >
 > Answer:
 
-During our project, we used the technique of involving both branches and pull requests. Whenever a new feature was under development or testing, we initiated a separate branch for it. Upon completion of the feature, we would create a pull request to merge this feature branch back into the main branch. As a standard practice, we ensured that the pull requests were always reviewed and approved by a different member of the group. This approach was used to make sure that theres collaboration and to maintain a review process.
+During our project, we used the technique of involving both branches and pull requests. Whenever a new feature was under development or testing, we initiated a separate branch for it. Upon completion of the feature, we would create a pull request to merge this feature branch back into the main branch.Incase any of any uncertainty we had a branch for concerning the replacement of the model that a malfucntion could produce.As a standard practice, we ensured that the pull requests were always reviewed and approved by a different member of the group. This approach was used to make sure that theres collaboration and to maintain a review process.
 
 
 ### Question 10
@@ -271,8 +271,11 @@ During our project, we used the technique of involving both branches and pull re
 > *pipeline*
 >
 > Answer:
+> User
 
---- question 10 fill here ---
+Initially, we utilized Google Drive for data storage, with DVC (Data Version Control) handling the management. However, to enhance our storage solution, we later tried to experiment with our data from Google Drive to Google Cloud's Data Storage buckets, continuing to manage it with DVC, but the outcome was the same.Both options enabled us to modify data as necessary while preserving its historical record, whie they effectively addressed the challenges of storing large data sets in a git repository.To conclude in both version the approach to ensured uniformity in data access and structure across all team members, which benefits for streamlining our pipelines and deployment processes.
+
+
 
 ### Question 11
 
