@@ -13,6 +13,7 @@ from data.dataloaders import get_dataloaders
 from models.model import TextClassificationModel
 
 
+
 def get_callbacks(model_path: str, model_name: str) -> list:
     """
     Get a list of PyTorch Lightning callbacks for model training.
@@ -143,7 +144,7 @@ def train_model(config):
     #prepare_wandb()
 
     # Manage paths
-    repo_path, data_path, model_path = get_paths()
+    repo_path, data_path, model_path = get_paths(config)
 
     # Get model
     model = TextClassificationModel(
