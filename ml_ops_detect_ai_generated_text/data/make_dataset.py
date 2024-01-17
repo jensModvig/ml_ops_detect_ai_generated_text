@@ -20,11 +20,19 @@ def clean_text(text: str) -> str:
 
 
 def process_data(raw_data_path, processed_data_path):
+
+    np.random.seed(42)
+
     # Read data
     data = pd.read_csv(raw_data_path / "train_essays.csv")
 
+    # Shuffle the rows of the data
+    data = data.sample(frac=1, random_state=42).reset_index(drop=True) # frac=1 means return all rows   
+
+
     # Clean text
     data["text"] = data["text"].apply(clean_text)
+
 
     # Load DistilBERT tokenizer
     tokenizer = DistilBertTokenizer.from_pretrained("distilbert-base-uncased")

@@ -29,3 +29,23 @@ def get_dataloaders(processed_data_path, config):
     )
 
     return train_loader, val_loader
+
+def get_test_dataloader(processed_data_path, config):
+    """
+    Get dataloaders for training and validation data
+    """
+
+    # Get datasets
+    test_data_path = processed_data_path / "test_dataset.pt"
+    test_dataset = torch.load(test_data_path)
+
+    # Get dataloaders
+    test_loader = torch.utils.data.DataLoader(
+        test_dataset,
+        batch_size=config.training.batch_size,
+        shuffle=False,
+        num_workers=config.data.num_workers,
+        persistent_workers=True,
+    )
+
+    return test_loader

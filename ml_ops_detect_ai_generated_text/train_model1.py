@@ -56,6 +56,24 @@ def get_trainer(config, callbacks, experiment_name):
     return trainer
 
 
+
+def hydra_path_2_save_path(model_path):
+    """
+    Get the path to the hydra directory and construct model paths
+    """
+    # Get the path to the hydra directory
+    hydra_cfg = hydra.core.hydra_config.HydraConfig.get()
+    output_path = hydra_cfg['runtime']['output_dir']
+    # extract elements from the path and assign them to variables
+    experiment_name = "_".join(output_path.split(os.sep)[-2:])
+    model_path = model_path / os.sep.join(output_path.split(os.sep)[-2:])
+    # create model_path if it does not exist
+    if not os.path.exists(model_path):
+        os.makedirs(model_path)
+    return model_path, experiment_name
+
+
+
 @hydra.main(config_path="../configs",
             config_name="config.yaml", version_base="1.2")
 def train_model(config):
@@ -66,8 +84,9 @@ def train_model(config):
     - Training the model
     - Saving the model
     """
-    current_datetime = datetime.now()
-    now = current_datetime.strftime("%d-%m-%Y_%H:%M:%S")
+
+    #current_datetime = datetime.now()
+    #now = current_datetime.strftime("%d-%m-%Y_%H:%M:%S")
     # Chekc if an experiment is present (in struct)
     if "experiment" in config:
         # let parameters in the experiment file overwrite the config file
@@ -92,9 +111,8 @@ def train_model(config):
     train_loader, val_loader = get_dataloaders(processed_data_path, config)
 
     # Initialize a Lightning Trainer
-    model_path = model_path / now
+    model_path, experiment_name = hydra_path_2_save_path(model_path)
     # Create a unique model name
-    experiment_name = now
     callbacks = get_callbacks(model_path, model_name=config.model.model_name)
     trainer = get_trainer(config, callbacks, experiment_name)
 
