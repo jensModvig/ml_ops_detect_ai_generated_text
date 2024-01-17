@@ -357,6 +357,7 @@ Configuration files play a crucial role in our setup. These files help in clearl
 > *training docker image: `docker run trainer:latest lr=1e-3 batch_size=64`. Link to docker file: <weblink>*
 >
 > Answer:
+
 The trainer.dockerfile defines an image that we utilized for local model training, using data we already had. This process saved the trained model's state in a shared folder.
 
 On the other hand, predict.dockerfile's image was responsible for loading this saved model state, running tests on some pre-existing data, and then calculating the model's accuracy. These two dockerfiles, used for local deployment, mainly differ in their initial commands: one initiates the training process while the other focuses on evaluation.
