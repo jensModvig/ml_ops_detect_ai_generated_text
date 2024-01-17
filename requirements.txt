@@ -36,4 +36,5 @@ torch_tb_profiler
 # deployment
 streamlit
 fastapi
+google-cloud-storage
 
