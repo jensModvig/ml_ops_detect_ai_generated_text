@@ -134,7 +134,7 @@ For the machine learning aspect of the project, Pytorch was utilized to define t
 
 Hydra was employed to ensure reproducibility. This approach separated the definition of hyperparameters from the model itself, making version control of the hyperparameters much easier. Additionally, Weights and Biases was used as a logging tool, providing insights into each training run, such as reporting losses.
 
-Docker played a crucial role in the deployment phase. Building the Docker image in the cloud ensured system-level reproducibility of the model pipeline. 
+Docker played a crucial role in the deployment phase. Marrying the building of images and containers in the cloud ensured system-level reproducibility of the model pipeline. 
 
 ## Coding environment
 
@@ -153,7 +153,7 @@ Docker played a crucial role in the deployment phase. Building the Docker image 
 >
 > Answer:
 
-Miniconda was used to manage the depenencies for this project. To automatically generate the list of dependencies ```pip freeze > requirements.txt``` can be used to extract all install dependencies from a environment. However, in to limit the size of the requirements file it was manually updated.
+Miniconda was used to manage the depenencies for this project. To automatically generate the list of dependencies ```pip freeze > requirements.txt``` can be used to extract all install dependencies from an environment. However, in to limit the size of the requirements file it was manually updated.
 
 Doing the following will get a new team member started with the project:
 
@@ -190,7 +190,7 @@ Finally install Pytorch based on you computer compatibilities following this gui
 > *experiments.*
 > Answer:
 > 
-In our project, we adopted the cookiecutter data science template as the foundational structure. Key files such as predict_model.py and train_model.py were developed, along with additional utility files, for instance, ml_ops_detect_ai_generated_text /data/init.py, which is responsible for dataset construction. The make_dataset.py file was left unfilled since our data necessitated minimal preprocessing, which we opted to perform during runtime instead
+In our project, we adopted the cookiecutter data-science template as the foundational structure. Key files such as predict_model.py and train_model.py were developed, along with additional utility files, for instance, ml_ops_detect_ai_generated_text /data/init.py, which is responsible for dataset construction. The make_dataset.py file was left unfilled since our data necessitated minimal preprocessing, which we opted to perform during runtime instead
 > We have included a folder named 'tests', which contains our unit tests related to the data and the model. Additionally, a '.dvc' folder has been created to hold metadata files associated with data versioning, utilizing cloud services.
 
 
@@ -204,9 +204,9 @@ In our project, we adopted the cookiecutter data science template as the foundat
 >
 > Answer:
 
-Ruff was utilized as both a linter and a formatter using GitHub actions to ensure PEP8 compliancy. By implementing it this way these checks are made automatically when pushing to main. In our case multiple redundant import statements were removed by this check. 
+Ruff was utilized as both a linter and formatter using GitHub Actions to ensure PEP8 compliancy. By implementing it this way these checks are made automatically when pushing to the main branch. In our case multiple redundant import statements were removed by this check. 
 
-In larger project with a big team collaborating, ensure a cohesive formatting helps with code readability and alleviates compatibility issues. 
+In larger projects with a big team collaborating, ensuring a cohesive formatting helps with code readability and alleviates compatibility issues. 
 
 
 ## Version control
@@ -227,6 +227,7 @@ In larger project with a big team collaborating, ensure a cohesive formatting he
 > Answer:
 
 --- question 7 fill here ---
+(Probably tests surrounding train_model.py, predict_model.py, and the data are cornerstones in the given application.)
 
 ### Question 8
 
@@ -242,6 +243,8 @@ In larger project with a big team collaborating, ensure a cohesive formatting he
 > Answer:
 
 --- question 8 fill here ---
+We have a coverage of XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.YYYYYYYYYYYYYYYYYYYYYYZZZZZZZZZZZ%
+Coverage of a 100% does not coincide with no corner cases being unhandled by the source code of the application, rather just how much of the code is executed at runtime. It is a good indicator however of proper testing.
 
 ### Question 9
 
@@ -255,8 +258,7 @@ In larger project with a big team collaborating, ensure a cohesive formatting he
 > *addition to the main branch. To merge code we ...*
 >
 > Answer:
-
-During our project, we used the technique of involving both branches and pull requests. Whenever a new feature was under development or testing, we initiated a separate branch for it. Upon completion of the feature, we would create a pull request to merge this feature branch back into the main branch.Incase any of any uncertainty we had a branch for concerning the replacement of the model that a malfucntion could produce.As a standard practice, we ensured that the pull requests were always reviewed and approved by a different member of the group. This approach was used to make sure that theres collaboration and to maintain a review process.
+For this project both branches, forks, and pull requests were used. Implementing new features and working on distinct issues helps keep overview of the development of the pipeline. Upon completion of the given feature the branch was merged back into the main branch after review. Ideally, this is done by assigning another team member as a reviewee, however this was not always done for this project. This promotes a collaborative environment among the project contributors and maintainers and ensures that the code merged into the main "production" branch is thoroughly vetted beforehand.
 
 
 ### Question 10
@@ -271,10 +273,7 @@ During our project, we used the technique of involving both branches and pull re
 > *pipeline*
 >
 > Answer:
-> User
-
-Initially, we utilized Google Drive for data storage, with DVC (Data Version Control) handling the management. However, to enhance our storage solution, we later tried to experiment with our data from Google Drive to Google Cloud's Data Storage buckets, continuing to manage it with DVC, but the outcome was the same.Both options enabled us to modify data as necessary while preserving its historical record, whie they effectively addressed the challenges of storing large data sets in a git repository.To conclude in both version the approach to ensured uniformity in data access and structure across all team members, which benefits for streamlining our pipelines and deployment processes.
-
+The project data was stored with DVC in Google Drive, however when experimenting with the Google Cloud Platform (GCP) we used their Data Storage Buckets still managed with DVC. The outcome is in essence the same. The version control of the data enables one to track changes, similarly to GitHub, which can help in development and production to maintain uniformity among developers, and enables one to quickly find and fix new bug instances based on the historical records. Moreover, it addresses the challenges of storing large data sets in git, and instead merely store a pointer. 
 
 
 ### Question 11
@@ -292,6 +291,7 @@ Initially, we utilized Google Drive for data storage, with DVC (Data Version Con
 > Answer:
 
 --- question 11 fill here ---
+The organization of our CI has been split into XXXXXXX files (Writing current setup): the pytests.yml file tests -----------. The codecheck.yml file ensures that the code in the repository is PEP8 compliant using the ruff package. Currently, these tests are merely executed on an Ubuntu Linux OS, but could be extended to macOS and Windows easily. Another idea could be to implement a workflow, which runs a docker instance on the GCP and ensures that the building and pushing of the repository to the cloud is succesful.
 
 ## Running code and tracking experiments
 
@@ -309,7 +309,9 @@ Initially, we utilized Google Drive for data storage, with DVC (Data Version Con
 > *We used a simple argparser, that worked in the following way: python my_script.py --lr 1e-3 --batch_size 25*
 >
 > Answer:
-The hyperparameter values were defined in hydra configuration files, and we integrated a hydra decorator into the 'train' function of the train_model.py file. This integration facilitated the insertion of hyperparameters and enabled the logging of both experiment performance and the hyperparameters utilized. To initiate an experiment.To run the function, just write in the terminal 'python ml_ops_detect_ai_generated_text/train_model.py' directly would produce the outcome.
+
+The configuration pipeline is managed using Hydra, which creates a config folder, wherein different experiments can be defined. The Hydra decorater is input in the model training file and points to a config file, which in turn points to a specific experiment that contains a set of hyper parameters for the execution thereof. This enables a streamlined and reproducable approach with logging enabled for future users. In order to initiate an experiment, assuming one has followed the setup of the repository and virtual environment requirements, one simply executes the following line in the terminal `python <project-name>/train_model.py`.
+
 
 
 ### Question 13
@@ -325,7 +327,7 @@ The hyperparameter values were defined in hydra configuration files, and we inte
 >
 > Answer:
 
-Configuration files play a crucial role in our setup. These files help in clearly linking hyperparameters with the corresponding model performance, leaving no ambiguity. Additionally, DVC is implemented to ensure data consistency across different machines. Furthermore, the use of Docker facilitates the creation of a stable environment, maintaining specific library versions, dependencies, and packages. This setup is vital to prevent any variations in library behaviors from impacting our results.We couldn't achieve complete reproducibility was in random processes, such as the shuffling of batches, since we didn't regulate these with seeds. Moreover, it's important to mention that even when seeds are used, PyTorch doesn't ensure the outputs will be exactly the same every time.
+Configuration files play a crucial role in our setup. These files help in clearly linking hyperparameters with the corresponding model performance, leaving no ambiguity. Additionally, DVC is implemented to ensure data consistency across different machines. Furthermore, the use of Docker facilitates the creation of a stable environment, maintaining specific library versions, dependencies, and packages. GCP or cloud computing can help configure the specific hardware setup, if the information and resources are readily available. This setup is vital to prevent any variations in library behaviors from impacting our results. (((((((((Needs a look the following two sentences))))))))))). We couldn't achieve complete reproducibility was in random processes, such as the shuffling of batches, since we didn't regulate these with seeds. Moreover, it's important to mention that even when seeds are used, PyTorch doesn't ensure the outputs will be exactly the same every time.
 
 ### Question 14
 
@@ -379,6 +381,7 @@ For deployment on Google Cloud Platform (GCP), we used the dockerfile located in
 > Answer:
 
 --- question 16 fill here ---
+Debugging methods may be dependent on the group member, but generally the debugging tool in VSCode was used due to the familiarity with its uses in terms of stepping through the code. The python debugger pdb was also used once or twice. In terms of profiling...
 
 ## Working in the cloud
 
@@ -395,9 +398,9 @@ For deployment on Google Cloud Platform (GCP), we used the dockerfile located in
 >
 > Answer:
 
-On the Google Cloud Platform, we utilized a variety of services. For remote storage of our data and Docker images, we relied on Cloud Storage. Additionally, we established a GCP Bucket, designated as the remote repository for our data version control, allowing us to efficiently push to and pull data from the cloud.
+On the Google Cloud Platform, we utilized a variety of services. For remote storage of our data and Docker images, we relied on Cloud Storage service. Here, we established a GCP Bucket, designated as the remote repository for our data version control, allowing us to efficiently push to and pull data from the cloud.
 
-We configured triggers to automate the building of trainer and predictor Docker images. These triggers were activated by any push to the main branch of our cloud repository, which mirrors our git repository. All the container images created throughout the project were stored and are accessible in the Container Registry.
+We configured triggers to automate the building of trainer and predictor Docker images. These triggers were activated by any push to the main branch of our cloud repository, which mirrors our git repository. All the container images created throughout the project were stored and are accessible in the Container Registry (Soon only Artifact Registry).
 
 For building and deploying the inference API, we employed Cloud Run and Cloud Functions, leveraging their capabilities for our project's needs.
 
@@ -414,8 +417,8 @@ For building and deploying the inference API, we employed Cloud Run and Cloud Fu
 > *using a custom container: ...*
 >
 > Answer:
- Vertex AI in google cloud,is meant to be used for training the model in the cloud. 
---- question 18 fill here ---
+
+The Virtual Machines (VMs) can be defined according to the users needs, which in our case primarily meant implementing a ubuntu debian-based VM with the latest pytorch version available. This is offered both for CPU and in some instances and regions also GPUs. The Compute Engine service was used to run the code remotely and perform the tasks of the application, ie. training and evaluation of the model. Moreover, we created an instance from the docker container in the Cloud Storage, which is triggered each time a new push to main is executed. Ideally, the Vertex AI service could have been used to run custom jobs and use their logging services, but this proved to be a challenge to implement.
 
 ### Question 19
 
@@ -477,8 +480,7 @@ For building and deploying the inference API, we employed Cloud Run and Cloud Fu
 >
 > Answer:
 
-In general, this subject wasn't given top priority in monitoring because Google Cloud appears to be quite comprehensive in its monitoring capabilities, covering aspects like security, user activity, and performance. Moreover, there's an option to establish a maximum on the number of requests.
-Additionally, "Cloud Armor Network Security" offers safeguards against threats such as DDoS attacks. Due to limited time.
+In general, this subject wasn't given top priority because Google Cloud appears to be quite comprehensive in its monitoring capabilities, covering aspects like security, user activity, and performance. Moreover, there's an option to establish a maximum on the number of requests. Additionally, "Cloud Armor Network Security" offers safeguards against threats such as DDoS attacks. The reason for no monitoring is primarily due to time constraints since the implementation of our application on the cloud proved difficult.
 
 --- question 23 fill here ---
 
@@ -495,6 +497,7 @@ Additionally, "Cloud Armor Network Security" offers safeguards against threats s
 > Answer:
 
 --- question 24 fill here ---
+s194264 used 25$ of the alloted 50$. 
 
 ## Overall discussion of project
 
@@ -529,7 +532,8 @@ Additionally, "Cloud Armor Network Security" offers safeguards against threats s
 >
 > Answer:
 
-Configuring our deployment setup and getting everything up and running on Google Cloud turned out to be the toughest and most time-consuming task for us. A lot of this difficulty came from our team's relative unfamiliarity with Google Cloud's machine learning features – even just getting the hang of the interface was quite a task. We had to rely heavily on a mix of trial and error, along with a lot of detailed reading of tutorials and guides, to get our whole pipeline operational. It was a bit of a journey, but in the end, we managed to get everything working as intended.
+Configuring our deployment setup and getting everything up and running on Google Cloud turned out to be the toughest and most time-consuming task for us. A lot of this difficulty came from our team's relative unfamiliarity with Google Cloud's features and how they operate with docker, etc. Even just getting the hang of the interface was quite a task. We had to rely heavily on a mix of trial and error, along with a lot of  
+detailed reading of tutorials and guides, to get our whole pipeline operational. It was a bit of a journey, but in the end, we managed to get everything working as intended, but leaving quite a lot of unexplored potential in terms of monitoring and other tasks presented in later exercises, including but not limited to the exhaustive check list, which we would have liked to explore given the opportunity.
 
 
 --- question 26 fill here ---
@@ -548,18 +552,5 @@ Configuring our deployment setup and getting everything up and running on Google
 > *All members contributed to code by...*
 >
 > Answer:
-In general students contributed equally to the project, and we often worked side-by-side. Everyone worked on the documentation of the project as well.
 
-In case specific contributions are needed:
-
-s194245
-
-s194262
-
-s194264
-
-Pavlos Adamakis-s222968
-
-s173955 
-
---- question 27 fill here ---
+As mandated by the formal requirement, which emphasizes the need for transparency in individual contributions to ensure fairness, the group and its members wish to affirm that each member has participated and delivered a commendable and closely equal contribution across the different sections of the project and repository. Generally, each person contributed side-by-side in regards to debugging several different aspects of the development cycle. Should further clarification be required, please feel free to contact any of the group members.
