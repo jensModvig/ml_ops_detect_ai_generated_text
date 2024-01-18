@@ -8,7 +8,7 @@ def main():
 
     if "model" not in st.session_state:
         # Load in model
-        st.markdown("The model is currently being loaded. This might take up to a minut.")
+        st.markdown("The model is currently being loaded. This might take up to a minute.")
         model = get_model()
         # put the model in session state for streamlit
         st.session_state["model"] = model
