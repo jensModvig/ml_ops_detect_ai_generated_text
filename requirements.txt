@@ -37,4 +37,5 @@ torch_tb_profiler
 streamlit
 fastapi
 google-cloud-storage
-
+gcsfs
+st-files-connection
