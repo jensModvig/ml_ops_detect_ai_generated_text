@@ -6,6 +6,7 @@ data/*
 models/
 outputs/
 wandb/
+*.local
 
 # but not the following paths:
 !ml_ops_detect_ai_generated_text/data/

@@ -3,7 +3,7 @@ import pytorch_lightning as pl
 from transformers import DistilBertForSequenceClassification, DistilBertTokenizer
 from sklearn.metrics import roc_curve, auc
 
-ACCESS_TOKEN = "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"
+PUBLIC_ACCESS_TOKEN = "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"
 
 class TextClassificationModel(pl.LightningModule):
     def __init__(self, model_name=None, num_labels=None, learning_rate=None) -> None:
