@@ -4,7 +4,7 @@ Project repository for Machine Learning Operation 02476
 
 - Aron D. Jacobsen (s194262)
 - Daniel Mathias Holmelund (s194245)
-- Jacob Sebastian Engel Ketmig (s194264)
+- Jakob Sebastian Engel Ketmig (s194264)
 - Jens Dieter Kjær Modvig (s173955)
 - Pavlos Mylis Adamakis (s222968)
 
