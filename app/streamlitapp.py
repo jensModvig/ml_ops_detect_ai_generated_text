@@ -1,6 +1,6 @@
 import streamlit as st
 
-from cloud_fucntions import *
+from cloud_functions import *
 
 def main():
     st.title("Detection of AI-generated Text")

@@ -81,7 +81,7 @@ def get_model():
     MODEL_FILE = "distilbert-base-uncased-epoch=00-val_loss=0.00.ckpt"
 
     client = storage.Client()
-    bucket = client.get_bucket(BUCKET_NAME)
+    bucket = client.bucket(BUCKET_NAME)
     blob = bucket.get_blob(MODEL_FILE)
     blob_file = blob.open("rb")
 
