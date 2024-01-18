@@ -12,6 +12,7 @@ def main():
         model = get_model()
         # put the model in session state for streamlit
         st.session_state["model"] = model
+        st.rerun()
 
     st.markdown("The model is loaded.")
 
