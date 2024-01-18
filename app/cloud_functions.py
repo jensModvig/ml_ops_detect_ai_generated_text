@@ -85,7 +85,7 @@ def get_model():
     blob = bucket.get_blob(MODEL_FILE)
     blob_file = blob.open("rb")
 
-    model_pretrained = torch.load(blob_file)
+    model_pretrained = torch.load(blob_file, map_location = torch.device('cpu'))
     blob_file.close()
     model = TextClassificationModel(model_name="distilbert-base-uncased", num_labels=2, learning_rate=0.0001)
     model.load_state_dict(model_pretrained["state_dict"], strict=False)
